@@ -9,7 +9,6 @@ const config = require('./src/config/config')
 connect().then(async () => {
 	console.log('Mongoose Conected from stock-notification!')
 	const telegramHash = process.env.TELEGRAM_HASH
-	console.log('telegramHash: ', telegramHash)
 	const telegramApiUrl = `${config.telegramApi.url}/bot${telegramHash}/sendMessage`
 	
 	// Actualizar precio del Stock
@@ -35,7 +34,6 @@ connect().then(async () => {
 	const date = new Date()
 	const hour = date.getHours()
 	const dailyNotifications = await listDailyNotifications({ hour })
-	console.log(dailyNotifications)
 
 	dailyNotifications.forEach(dailyNotification => {
 		const body = {
@@ -52,4 +50,4 @@ connect().then(async () => {
 	Promise.all(notificationsPromises).then(() => {
 		disconnect()
 	})
-})
+}).catch(err => console.log('Mongoose err: ', err))

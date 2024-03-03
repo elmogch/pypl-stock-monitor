@@ -54,11 +54,9 @@ async function priceCommand(chatId) {
 
 async function listNotificationsCommand(chatId) {
   const notifications = await listNotifications({ chatId })
-  console.log('notifications: ', notifications)
   const notificationsList = notifications.map(notification => {
     return `- $${notification.amount}`
   }).join('\n')
-  console.log('notificationsList: ', notificationsList)
   
   if (notificationsList) {
     bot.sendMessage(chatId, `Te notificaremos cuando la acción llegue a los siguientes montos (USD):\n${notificationsList}`)
@@ -77,12 +75,10 @@ async function createNotificationCommand(chatId, amountInput) {
   const stock = await findOrCreateStock({ symbol: config.symbol })
   const price = stock.price
 
-  /*
   if(amount < price) {
     bot.sendMessage(chatId, `La cantidad ($${amount} USD) debe ser mayor al precio actual (${price}) de la acción`)
     return
   }
-  */
 
   try {
     let notification = await findNotification({
@@ -138,7 +134,6 @@ async function viewDailyNotificationCommand(chatId) {
 
 async function setDailyNotificationCommand(chatId, hourInput) {
   const hour = parseInt(Number(hourInput))
-  console.log('hour: ', hour)
   if(Number.isNaN(hour) || !(hour>=0 && hour<=23)) {
     bot.sendMessage(chatId, 'Introduce la hora (valor entero entre 0 y 23)')
     return
@@ -156,7 +151,6 @@ async function setDailyNotificationCommand(chatId, hourInput) {
 
 async function unsetDailyNotificationCommand(chatId) {
   const dailyNotification = await findDailyNotification({ chatId })
-  console.log('unsetDailyNotificationCommand -> dailyNotification: ', dailyNotification)
   if (dailyNotification) {
     await deleteDailyNotification(chatId)
     bot.sendMessage(chatId, `Se ha eliminado la notifiación diaria`)
