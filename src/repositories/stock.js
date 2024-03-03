@@ -1,5 +1,5 @@
 require('dotenv').config()
-const fetch = require('fetch')
+const fetch = require('node-fetch')
 const Stock = require('../models/stock')
 const config = require('../config/config')
 // const stockData = require('../../output-sample/stock.json')

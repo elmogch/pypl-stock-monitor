@@ -1,5 +1,5 @@
 require('dotenv').config()
-const fetch = require('fetch')
+const fetch = require('node-fetch')
 const { connect, disconnect } = require('./src/lib/db')
 const { createOrUpdateStock } = require('./src/repositories/stock')
 const { listNotifications, deleteNotification } = require('./src/repositories/notification')
