@@ -1,3 +1,4 @@
+require('dotenv').config()
 const TelegramBot = require('node-telegram-bot-api');
 
 const config = require('../config/config')
@@ -14,8 +15,7 @@ const {
   deleteDailyNotification
 } = require('../repositories/dailynotification')
 
-const token = '7121722419:AAE5idIcsV6oV1bGe8nN1Kg1zDK-gFMxLbQ';
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot(process.env.TELEGRAM_HASH, {polling: true});
 
 const helpText = `
   *Lista de comandos*
