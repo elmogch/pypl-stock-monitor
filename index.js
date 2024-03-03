@@ -16,14 +16,9 @@ connect().then(() => {
   bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const inputText = msg.text
-
-    // /createnotification 100
     const inputCommand = inputText.split(' ')
     const command = inputCommand[0]
 
-    console.log('inputText', inputText)
-    console.log('command', command)
-  
     switch(command) {
       case '/price':
         await priceCommand(chatId)
