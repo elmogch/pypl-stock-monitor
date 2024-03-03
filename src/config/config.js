@@ -1,5 +1,5 @@
 module.exports = {
-    symbol: 'NVDA',
+    symbol: 'PYPL',
     telegramApi: {
         url: 'https://api.telegram.org'
     },
