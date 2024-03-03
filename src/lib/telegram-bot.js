@@ -15,7 +15,7 @@ const {
   deleteDailyNotification
 } = require('../repositories/dailynotification')
 
-const bot = new TelegramBot(process.env.TELEGRAM_HASH, {polling: true});
+const bot = new TelegramBot(process.env.TELEGRAM_HAST, {polling: true});
 
 const helpText = `
   *Lista de comandos*
