@@ -24,12 +24,12 @@ const helpText = `
 
   *Notificaciones*
   - /listnotifications - Listar notificaciones
-  - /createnotification - Crear notificación
+  - /createnotification (valor) - Crear notificación
   - /deletenotification - Eliminar noticación
 
   *Notificación Diaria*
   - /viewdailynotification - Ver la hora de notificación diaria
-  - /setdailynotification [0-23] - Activar notificación diaria
+  - /setdailynotification (0-23) - Activar notificación diaria
   - /unsetdailynotification - Desactivar la notifación diaria
 `
 
