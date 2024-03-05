@@ -9,7 +9,10 @@ async function getStockPrice() {
   const stockApiUrl = `${config.stockApi.url}?function=GLOBAL_QUOTE&symbol=${config.symbol}&apikey=${stockApiKey}`
   const response = await fetch(stockApiUrl)
   const data = await response.json()
-  console.log('data: ', data)
+  
+  if (!data['Global Quote'] || !data['Global Quote']['05. price']) {
+    return null
+  }
 
   // Simula asincronía del api del precio del stock para no terminar llamadas gratuitas mientras hacemos pruebas
   /*
@@ -19,8 +22,8 @@ async function getStockPrice() {
     }, 500)
   })
   */
-  const price = Number(data['Global Quote']['05. price'])
-  return price
+  return Number(data['Global Quote']['05. price'])
+
 }
 
 async function findStock(filters) {
@@ -33,7 +36,7 @@ async function findOrCreateStock(filters) {
     return stock
   }
 
-  const price = await getStockPrice()
+  const price = await getStockPrice() || stock.price
   return await Stock.create({
     symbol: config.symbol,
     price
@@ -42,16 +45,18 @@ async function findOrCreateStock(filters) {
 
 async function createOrUpdateStock(filters) {
   const stock = await findStock(filters)
-  const price = await getStockPrice()
+  const price = await getStockPrice() || stock.price
   
-  if (stock) {
-    stock.price = price
-    return await stock.save()
-  } else {
-    return await Stock.create({
-      symbol: config.symbol,
-      price
-    })
+  if (price) {
+    if (stock) {
+      stock.price = price
+      return await stock.save()
+    } else {
+      return await Stock.create({
+        symbol: config.symbol,
+        price
+      })
+    }
   }
 }
 
