@@ -34,7 +34,8 @@ connect().then(async () => {
 	const date = new Date()
 	const hour = date.getHours()
 	const dailyNotifications = await listDailyNotifications({ hour })
-
+	console.log('hour', hour)
+	console.log('dailyNotifications', dailyNotifications)
 	dailyNotifications.forEach(dailyNotification => {
 		const body = {
 			chat_id: dailyNotification.chatId,

@@ -9,6 +9,7 @@ async function getStockPrice() {
   const stockApiUrl = `${config.stockApi.url}?function=GLOBAL_QUOTE&symbol=${config.symbol}&apikey=${stockApiKey}`
   const response = await fetch(stockApiUrl)
   const data = await response.json()
+  console.log('data: ', data)
 
   // Simula asincronía del api del precio del stock para no terminar llamadas gratuitas mientras hacemos pruebas
   /*
